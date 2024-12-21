@@ -9,7 +9,7 @@ const Federated_Credentials = require('../db/index.js');
 const User = require("../db/index.js")
 dotenv.config()
 
-
+//Use the middlewear and GoogleStrategy function. Ensure your client_ID and client_Secret are here.
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   callbackURL: process.env.CALLBACK_URL,
