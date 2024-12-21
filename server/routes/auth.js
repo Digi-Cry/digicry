@@ -5,7 +5,7 @@ const GoogleStrategy = require('passport-google-oidc');
 var db = require('../db');
 const Federated_Credentials = require('../db/index.js');
 
-
+//Use the middlewear and GoogleStrategy function. Ensure your client_ID and client_Secret are here.
 passport.use(new GoogleStrategy({
   clientID: process.env['GOOGLE_CLIENT_ID'],
   clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
