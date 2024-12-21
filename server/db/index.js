@@ -1,28 +1,12 @@
 const mongoose = require('mongoose');
-const { Schema, model } = mongoose;
+
 //Schemas Below this line
-const users = new Schema({
 
-  username: String,
-  hashed_password: String,
-  salt: String,
-  name: String,
-  location: String,
-
-})
-//
-const federated_credentialsModel = new Schema({
-
-  user_id: Number,
-  provider: String,
-  subject: String,
-
-})
 
 
 //Models below this line
 
-const Federated_Credentials = mongoose.model('Federated_Credentials', federated_credentialsModel);
+
 
 
 //Connecting to mongodb database
@@ -35,5 +19,3 @@ mongoose.connect('mongodb//localhost:27017//digicry')
 })
 
 //Exports go here
-
-module.exports = { Federated_Credentials };
