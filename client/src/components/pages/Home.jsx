@@ -182,12 +182,40 @@ function Home() {
               {
                 eventData.map((event) => {
                   return <div className="event-card-placeholder" key={event._id}>
-                    <p>Title: {event.title}</p>
-                    <p>Date: {event.date}</p>
-                    <p>Location: {event.location[0]}</p>
-                    <p>City: {event.location[1]}</p>
-                    <p>Description: {event.description}</p>
-                    <p>Venue: {event.venueName}</p>
+
+
+                    <div className="event-card-wrapper">
+
+
+                      <div className="event-title">
+                        {event.title}
+                      </div>
+
+
+                      <div className="event-description">
+                        {event.description}
+                      </div>
+
+
+                      <div className="event-image-wrapper">
+
+                      </div>
+
+
+                      <div className="event-info-wrapper">
+                        <div className="event-date">
+                          {event.date}
+                        </div>
+
+                        <div className="event-location">
+                          {event.location[0]}
+                          {event.location[1]}
+                          {event.venueName}
+                        </div>
+
+                      </div>
+
+                    </div>
 
                   </div>
                 })
