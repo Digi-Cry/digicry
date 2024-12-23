@@ -269,6 +269,42 @@ body {
   transform: translateY(-2px);
 }
 
+
+
+/* UPCOMING EVENTS CSS */
+.event-card-wrapper {
+  padding: 12px;
+
+}
+
+.event-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.event-description {
+  font-size: 10px;
+  margin: 20px;
+}
+
+
+.event-image-wrapper {
+
+}
+
+.event-info-wrapper {
+
+}
+
+.event-date {
+  font-size: 8px;
+
+}
+
+.event-location {
+  font-size: 10px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .main-title {
