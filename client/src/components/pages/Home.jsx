@@ -14,259 +14,7 @@ function Home() {
   const [quote, setQuote] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  const testData = [
-    {
-      "_id": "6769cdfeb7c828cb5a596123",
-      "title": "New Orleans Jazz Festival - Weekend 1 - 4 Day Pass",
-      "date": "Thu, Apr 24, 10:59 AM – 12:29 PM",
-      "location": [
-        "Fair Grounds Race Course & Slots, 1751 Gentilly Blvd",
-        "New Orleans, LA"
-      ],
-      "description": "About The New Orleans Jazz & Heritage Festival The New Orleans Jazz & Heritage Festival, or as the locals call it, Jazz Fest, is the celebration of the unique culture and heritage of New Orleans...",
-      "venueName": "Fair Grounds Race Course & Slots",
-      "linkUrl": "https://www.neworleans.com/event/new-orleans-jazz-%26-heritage-festival/3197/",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoaeFe1WIVnxpELu4GUI9jNx8RMl2NsrfOXj6xdSkbDg8LIzOJ2c0fhx0&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWqY9dMlcwH1rKP7BAz6HjKGOwYIvotvpuyMKwrLxKhA&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769cdfeb7c828cb5a596124",
-      "title": "Up All Night Paranormal Event! Explore Inside to Ghost Hunt 2 locations!",
-      "date": "Dec 22, 2024, 11 PM – Jan 6, 2025, 2 AM",
-      "location": [
-        "Bloody Mary's Tours, Haunted Museum & Voodoo Shop, 826 & 828 N Rampart St",
-        "New Orleans, LA"
-      ],
-      "description": "Do you want to connect with the spirtis? Team up on a paranormal investigation; Use ghost hunting tools & communicate after hours with us!",
-      "venueName": "Bloody Mary's Tours, Haunted Museum & Voodoo Shop",
-      "linkUrl": "https://www.eventbrite.com/e/up-all-night-paranormal-event-explore-inside-to-ghost-hunt-2-locations-tickets-1025028687397",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTevM8SGP1EiGw_MHXRdAw4yuBkMbDkqtGjRdWRgBb4TWqBveegAdCCLmU&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhYrx2s-nbgEx80tfReAT9btAwrD7tdY0kSODknbQRaQ&s",
-      "__v": 0
-    },
-    {
-      "_id": "6769cdfeb7c828cb5a596125",
-      "title": "French Quarter Festival",
-      "date": "Apr 10, 2025, 9:30 AM – Apr 13, 2025, 6:00 PM",
-      "location": [
-        "Omni Royal Orleans, 621 St Louis St",
-        "New Orleans, LA"
-      ],
-      "description": "French Quarter Fest returns April 10-13, 2025! View Our Ultimate French Quarter Fest Guide",
-      "venueName": "Omni Royal Orleans",
-      "linkUrl": "https://www.neworleans.com/event/french-quarter-festival/3268/",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUY2VRTJ1y7f6wJ73vX-eY3T9tWzNOMDQfvdGC0uXf5aBTMWHIgGJxMYw&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRidPMJ8I8KlpaTkq1mX36KMtJn-GNkO-_WrKLTX37nEQ&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769cdfeb7c828cb5a596126",
-      "title": "Fair Grounds Live Racing",
-      "date": "Fri, Dec 27, 12:45 – 4:45 PM",
-      "location": [
-        "Fair Grounds Race Course & Slots, 1751 Gentilly Blvd",
-        "New Orleans, LA"
-      ],
-      "description": "Fair Grounds Race Course & Slots, located in New Orleans, Louisiana, is set to commence its 153rd season of live thoroughbred racing on November 22, 2024. The season will feature a series of...",
-      "venueName": "Fair Grounds Race Course & Slots",
-      "linkUrl": "https://traveldestinations.guide/new-orleans-la-us/event/28074-fair-grounds-live-racing-friday-december-27-2024-12-45-pm",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzn40ZrJE1jRZeRooZYdeJf99ptNbX2BlOjQ8T-K5d_FtO3PO3GG-TMi8&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv4OBiJYBAUsT5RleAtR6TyE35ppxby7onSmsRe5UsPg&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769cdfeb7c828cb5a596127",
-      "title": "Hogs for the Cause",
-      "date": "Apr 4, 2025, 3:30 PM – Apr 5, 2025, 10:00 PM",
-      "location": [
-        "UNO Lakefront Arena, 6801 Franklin Ave",
-        "New Orleans, LA"
-      ],
-      "description": "Hogs for the Cause 2025 | New Orleans Pig out for a purpose at Hogs for the Cause. This massive BBQ festival is all about BBQ, bands and of course, the cause. This two- day fest features live...",
-      "venueName": "UNO Lakefront Arena",
-      "linkUrl": "https://www.neworleans.com/event/hogs-for-the-cause/3264/",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8j4DZWDhnscKtFneTkOCm4M3r3XlpFIUx-TcJ43zTCEuzAXI7X9oHJwg&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvqKO1yFu-Mp9FvkpykZVkv1ld9Nz8xm48kWxSxpr0eQ&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769cdfeb7c828cb5a596128",
-      "title": "EXOTIC SUPERBOWL CRUISE",
-      "date": "Feb 8, 2025, 4 PM – Feb 13, 2025, 8 AM",
-      "location": [
-        "Port of New Orleans, 1350 Port of New Orleans Pl",
-        "New Orleans, LA"
-      ],
-      "description": "Join us for the Ultimate Superbowl Experience on a luxurious cruise filled with exotic destinations, delicious food, and non-stop fun!",
-      "venueName": "Port of New Orleans",
-      "linkUrl": "https://www.eventbrite.com/e/exotic-superbowl-cruise-tickets-919501402447",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRccyUahqL2xAwJe56Ia796Ee8vpi-7nqhrXO_9FOsxLMhOZjhs2DoWZqI&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVqneXlJpeC5IcVEdx3_Sr1XnIL63iZLrI5--uQTgriw&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769cdfeb7c828cb5a596129",
-      "title": "New Orleans Dental Conference & Exhibition",
-      "date": "Apr 10, 2025, 9:30 AM – Apr 11, 2025, 6:00 PM",
-      "location": [
-        "Crowne Plaza New Orleans French Qtr - Astor, 739 Canal St. @, Bourbon St",
-        "New Orleans, LA"
-      ],
-      "description": "The New Orleans Dental Conference is organized by NODA and will be held from Apr 10 - 11, 2025, in Louisiana, USA.",
-      "venueName": "Crowne Plaza New Orleans French Qtr - Astor",
-      "linkUrl": "https://www.emedevents.com/c/medical-conferences-2025/new-orleans-dental-conference-nodc-louisiana-dental-association-lda-annual-session-2025",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnbKa9OlEGEvXfeAPX9TFxKh3LTYImrUNnzIQAm38&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwp_PSSn3n-BqOMnWjZ1I8asMrWIeeyHuz6a--izOeg&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769ce8ded5abf556425e3dd",
-      "title": "New Orleans Jazz Festival - Weekend 1 - 4 Day Pass",
-      "date": "Thu, Apr 24, 10:59 AM – 12:29 PM",
-      "location": [
-        "Fair Grounds Race Course & Slots, 1751 Gentilly Blvd",
-        "New Orleans, LA"
-      ],
-      "description": "About The New Orleans Jazz & Heritage Festival The New Orleans Jazz & Heritage Festival, or as the locals call it, Jazz Fest, is the celebration of the unique culture and heritage of New Orleans...",
-      "venueName": "Fair Grounds Race Course & Slots",
-      "linkUrl": "https://www.neworleans.com/event/new-orleans-jazz-%26-heritage-festival/3197/",
-      "ticketUrl": "https://www.unation.com/event/new-orleans-jazz-festival-weekend-1-4-day-pass-53657129/",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoaeFe1WIVnxpELu4GUI9jNx8RMl2NsrfOXj6xdSkbDg8LIzOJ2c0fhx0&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWqY9dMlcwH1rKP7BAz6HjKGOwYIvotvpuyMKwrLxKhA&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769ce8ded5abf556425e3de",
-      "title": "Up All Night Paranormal Event! Explore Inside to Ghost Hunt 2 locations!",
-      "date": "Dec 22, 2024, 11 PM – Jan 6, 2025, 2 AM",
-      "location": [
-        "Bloody Mary's Tours, Haunted Museum & Voodoo Shop, 826 & 828 N Rampart St",
-        "New Orleans, LA"
-      ],
-      "description": "Do you want to connect with the spirtis? Team up on a paranormal investigation; Use ghost hunting tools & communicate after hours with us!",
-      "venueName": "Bloody Mary's Tours, Haunted Museum & Voodoo Shop",
-      "linkUrl": "https://www.eventbrite.com/e/up-all-night-paranormal-event-explore-inside-to-ghost-hunt-2-locations-tickets-1025028687397",
-      "ticketUrl": "https://www.eventbrite.com/e/up-all-night-paranormal-event-explore-inside-to-ghost-hunt-2-locations-tickets-1025028687397",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTevM8SGP1EiGw_MHXRdAw4yuBkMbDkqtGjRdWRgBb4TWqBveegAdCCLmU&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhYrx2s-nbgEx80tfReAT9btAwrD7tdY0kSODknbQRaQ&s",
-      "__v": 0
-    },
-    {
-      "_id": "6769ce8ded5abf556425e3df",
-      "title": "French Quarter Festival",
-      "date": "Apr 10, 2025, 9:30 AM – Apr 13, 2025, 6:00 PM",
-      "location": [
-        "Omni Royal Orleans, 621 St Louis St",
-        "New Orleans, LA"
-      ],
-      "description": "French Quarter Fest returns April 10-13, 2025! View Our Ultimate French Quarter Fest Guide",
-      "venueName": "Omni Royal Orleans",
-      "linkUrl": "https://www.neworleans.com/event/french-quarter-festival/3268/",
-      "ticketUrl": "https://www.neworleans.com/event/french-quarter-festival/3268/",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUY2VRTJ1y7f6wJ73vX-eY3T9tWzNOMDQfvdGC0uXf5aBTMWHIgGJxMYw&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRidPMJ8I8KlpaTkq1mX36KMtJn-GNkO-_WrKLTX37nEQ&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769ce8ded5abf556425e3e0",
-      "title": "Fair Grounds Live Racing",
-      "date": "Fri, Dec 27, 12:45 – 4:45 PM",
-      "location": [
-        "Fair Grounds Race Course & Slots, 1751 Gentilly Blvd",
-        "New Orleans, LA"
-      ],
-      "description": "Fair Grounds Race Course & Slots, located in New Orleans, Louisiana, is set to commence its 153rd season of live thoroughbred racing on November 22, 2024. The season will feature a series of...",
-      "venueName": "Fair Grounds Race Course & Slots",
-      "linkUrl": "https://traveldestinations.guide/new-orleans-la-us/event/28074-fair-grounds-live-racing-friday-december-27-2024-12-45-pm",
-      "ticketUrl": "https://www.eventticketscenter.com/fair-grounds-live-racing-new-orleans-12-27-2024/6804860/t",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzn40ZrJE1jRZeRooZYdeJf99ptNbX2BlOjQ8T-K5d_FtO3PO3GG-TMi8&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv4OBiJYBAUsT5RleAtR6TyE35ppxby7onSmsRe5UsPg&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769ce8ded5abf556425e3e1",
-      "title": "Hogs for the Cause",
-      "date": "Apr 4, 2025, 3:30 PM – Apr 5, 2025, 10:00 PM",
-      "location": [
-        "UNO Lakefront Arena, 6801 Franklin Ave",
-        "New Orleans, LA"
-      ],
-      "description": "Hogs for the Cause 2025 | New Orleans Pig out for a purpose at Hogs for the Cause. This massive BBQ festival is all about BBQ, bands and of course, the cause. This two- day fest features live...",
-      "venueName": "UNO Lakefront Arena",
-      "linkUrl": "https://www.neworleans.com/event/hogs-for-the-cause/3264/",
-      "ticketUrl": "https://www.tixr.com/groups/hogsforthecause/events/2025-hogs-for-the-cause-barbecue-music-festival-114709",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8j4DZWDhnscKtFneTkOCm4M3r3XlpFIUx-TcJ43zTCEuzAXI7X9oHJwg&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvqKO1yFu-Mp9FvkpykZVkv1ld9Nz8xm48kWxSxpr0eQ&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769ce8ded5abf556425e3e2",
-      "title": "EXOTIC SUPERBOWL CRUISE",
-      "date": "Feb 8, 2025, 4 PM – Feb 13, 2025, 8 AM",
-      "location": [
-        "Port of New Orleans, 1350 Port of New Orleans Pl",
-        "New Orleans, LA"
-      ],
-      "description": "Join us for the Ultimate Superbowl Experience on a luxurious cruise filled with exotic destinations, delicious food, and non-stop fun!",
-      "venueName": "Port of New Orleans",
-      "linkUrl": "https://www.eventbrite.com/e/exotic-superbowl-cruise-tickets-919501402447",
-      "ticketUrl": "https://www.eventbrite.com/e/exotic-superbowl-cruise-tickets-919501402447",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRccyUahqL2xAwJe56Ia796Ee8vpi-7nqhrXO_9FOsxLMhOZjhs2DoWZqI&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVqneXlJpeC5IcVEdx3_Sr1XnIL63iZLrI5--uQTgriw&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769ce8ded5abf556425e3e3",
-      "title": "New Orleans Dental Conference & Exhibition",
-      "date": "Apr 10, 2025, 9:30 AM – Apr 11, 2025, 6:00 PM",
-      "location": [
-        "Crowne Plaza New Orleans French Qtr - Astor, 739 Canal St. @, Bourbon St",
-        "New Orleans, LA"
-      ],
-      "description": "The New Orleans Dental Conference is organized by NODA and will be held from Apr 10 - 11, 2025, in Louisiana, USA.",
-      "venueName": "Crowne Plaza New Orleans French Qtr - Astor",
-      "linkUrl": "https://www.emedevents.com/c/medical-conferences-2025/new-orleans-dental-conference-nodc-louisiana-dental-association-lda-annual-session-2025",
-      "ticketUrl": "https://www.emedevents.com/c/medical-conferences-2025/new-orleans-dental-conference-nodc-louisiana-dental-association-lda-annual-session-2025",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnbKa9OlEGEvXfeAPX9TFxKh3LTYImrUNnzIQAm38&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwp_PSSn3n-BqOMnWjZ1I8asMrWIeeyHuz6a--izOeg&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769cf28e7f91a3d6b30d661",
-      "title": "New Orleans Jazz Festival - Weekend 1 - 4 Day Pass",
-      "date": "Thu, Apr 24, 10:59 AM – 12:29 PM",
-      "location": [
-        "Fair Grounds Race Course & Slots, 1751 Gentilly Blvd",
-        "New Orleans, LA"
-      ],
-      "description": "About The New Orleans Jazz & Heritage Festival The New Orleans Jazz & Heritage Festival, or as the locals call it, Jazz Fest, is the celebration of the unique culture and heritage of New Orleans...",
-      "venueName": "Fair Grounds Race Course & Slots",
-      "linkUrl": "https://www.neworleans.com/event/new-orleans-jazz-%26-heritage-festival/3197/",
-      "ticketUrl": "https://www.unation.com/event/new-orleans-jazz-festival-weekend-1-4-day-pass-53657129/",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoaeFe1WIVnxpELu4GUI9jNx8RMl2NsrfOXj6xdSkbDg8LIzOJ2c0fhx0&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWqY9dMlcwH1rKP7BAz6HjKGOwYIvotvpuyMKwrLxKhA&s=10",
-      "__v": 0
-    },
-    {
-      "_id": "6769cf28e7f91a3d6b30d662",
-      "title": "Up All Night Paranormal Event! Explore Inside to Ghost Hunt 2 locations!",
-      "date": "Dec 22, 2024, 11 PM – Jan 6, 2025, 2 AM",
-      "location": [
-        "Bloody Mary's Tours, Haunted Museum & Voodoo Shop, 826 & 828 N Rampart St",
-        "New Orleans, LA"
-      ],
-      "description": "Do you want to connect with the spirtis? Team up on a paranormal investigation; Use ghost hunting tools & communicate after hours with us!",
-      "venueName": "Bloody Mary's Tours, Haunted Museum & Voodoo Shop",
-      "linkUrl": "https://www.eventbrite.com/e/up-all-night-paranormal-event-explore-inside-to-ghost-hunt-2-locations-tickets-1025028687397",
-      "ticketUrl": "https://www.eventbrite.com/e/up-all-night-paranormal-event-explore-inside-to-ghost-hunt-2-locations-tickets-1025028687397",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTevM8SGP1EiGw_MHXRdAw4yuBkMbDkqtGjRdWRgBb4TWqBveegAdCCLmU&s",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhYrx2s-nbgEx80tfReAT9btAwrD7tdY0kSODknbQRaQ&s",
-      "__v": 0
-    },
-  ];
-
+  const [eventData, setEventData] = useState([]);
 
   // Function to fetch quote from the API
   const fetchQuote = () => {
@@ -305,10 +53,40 @@ function Home() {
       });
   };
 
+  // Axios GET request to retrieve upcoming events from DB
+  /** NOTE: This will be refactored many times. */
+  // const fetchEvents = () => {
+  //   axios.get('/api/events/all', {
+  //     params: {
+  //       limit: 8,
+  //     }
+  //   })
+  //     .then((response) => {
+  //       const eventData = response.data;
+  //     })
+  //     .catch((err) => {
+  //       console.error('Error fetching events from DB', err);
+  //     })
+  // }
+
+  const fetchEvents = () => {
+    axios.get('/api/events/all')
+      .then((response) => {
+        // assign variable to response data - eventData is used to map over data in render
+        const eventData = response.data;
+        // update state
+        setEventData(eventData);
+      })
+      .catch((err) => {
+        console.error('Error fetching events from DB', err);
+      })
+  }
+
   // Fetch motivational quote when the component mounts
   useEffect(() => {
     // Call the fetchQuote function
     fetchQuote();
+    fetchEvents();
   }, []); // Empty dependency array ensures this runs once when the component mounts
 
   // Helper function to render quote content based on that state
@@ -400,8 +178,9 @@ function Home() {
               Connect with your community
             </Typography>
             <Box className="events-preview">
+
               {
-                testData.map((event) => {
+                eventData.map((event) => {
                   return <div className="event-card-placeholder" key={event._id}>
                     <p>Title: {event.title}</p>
                     <p>Date: {event.date}</p>
