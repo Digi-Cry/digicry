@@ -91,9 +91,15 @@ module.exports = {
         pathRewrite: { "^/api/stoic-quote": "/stoic-quote" },
       },
 
+      /**
+       * Changed the target port to 3000 to match our server's port - this change didn't break anything on my end.
+       * If it breaks anything on y'alls end LMK and I'll help debug.
+       * In our server/index.js we're initializing the server using the port in our .env file, and as a fallback we're setting it to 5001.
+       * I think the port's were using for the Google Oauth callback is 3000, so setting this to 3000 for now.
+       */
       {
         context: ["/api"],
-        target: "http://localhost:5001",
+        target: "http://localhost:3000",
         secure: false,
         changeOrigin: true,
       },
