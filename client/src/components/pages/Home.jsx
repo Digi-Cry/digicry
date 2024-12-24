@@ -16,6 +16,24 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [eventData, setEventData] = useState([]);
 
+  // GEOLOCATION
+  const [userLocation, setUserLocation] = useState(null);
+/** function to get user's location */
+  const getUserLocation = () => {
+    // if browser supports geolocation webextension
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        // get access to lat and long values from GeoLocationCoordinates obj
+        const { latitude, longitude } = position.coords;
+        // set user's location state
+        setUserLocation({ latitude, longitude });
+      });
+    } else {
+      console.error('Gelocation not supported by this browser')
+    }
+  };
+
+
   // Function to fetch quote from the API
   const fetchQuote = () => {
     // Log to the console to indicate that quote fetching has started
@@ -177,6 +195,14 @@ function Home() {
             <Typography variant="body1" className="section-description">
               Connect with your community
             </Typography>
+            <button onClick={getUserLocation}>Get User Location</button>
+            {userLocation && (
+              <div>
+                <h2>User Location</h2>
+                <p>Latitude: {userLocation.latitude}</p>
+                <p> Longitude: {userLocation.longitude}</p>
+              </div>
+            )}
             <Box className="events-preview">
 
               {
@@ -231,20 +257,3 @@ function Home() {
 export default Home;
 
 
-/**
- * {
- *       "_id": "6769cdfeb7c828cb5a596123",
- *       "title": "New Orleans Jazz Festival - Weekend 1 - 4 Day Pass",
- *       "date": "Thu, Apr 24, 10:59 AM – 12:29 PM",
- *       "location": [
- *         "Fair Grounds Race Course & Slots, 1751 Gentilly Blvd",
- *         "New Orleans, LA"
- *       ],
- *       "description": "About The New Orleans Jazz & Heritage Festival The New Orleans Jazz & Heritage Festival, or as the locals call it, Jazz Fest, is the celebration of the unique culture and heritage of New Orleans...",
- *       "venueName": "Fair Grounds Race Course & Slots",
- *       "linkUrl": "https://www.neworleans.com/event/new-orleans-jazz-%26-heritage-festival/3197/",
- *       "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoaeFe1WIVnxpELu4GUI9jNx8RMl2NsrfOXj6xdSkbDg8LIzOJ2c0fhx0&s",
- *       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWqY9dMlcwH1rKP7BAz6HjKGOwYIvotvpuyMKwrLxKhA&s=10",
- *       "__v": 0
- *     },
- */
