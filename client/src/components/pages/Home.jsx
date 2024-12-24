@@ -15,23 +15,79 @@ function Home() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [eventData, setEventData] = useState([]);
-
-  // GEOLOCATION
   const [userLocation, setUserLocation] = useState(null);
-/** function to get user's location */
-  const getUserLocation = () => {
+
+
+
+
+  
+  // UPCOMING EVENTS FEATURE
+  /**
+   * fetchEvents() - fetches all events from db
+   * getUserLoc - gets user location, returns a promise
+   * fetchEventsByLoc - checks for user location before calling fetchEvents
+   */
+
+  const fetchEvents = () => {
+    axios.get('/api/events/all')
+      .then((response) => {
+        // assign variable to response data - eventData is used to map over data in render
+        const eventData = response.data;
+        // update state
+        setEventData(eventData);
+      })
+      .catch((err) => {
+        console.error('Error fetching events from DB', err);
+      })
+  };
+
+  const getUserLoc = () => {
+  return new Promise((resolve, reject) => {
     // if browser supports geolocation webextension
     if (navigator.geolocation) {
+      // get user location obj
       navigator.geolocation.getCurrentPosition((position) => {
-        // get access to lat and long values from GeoLocationCoordinates obj
-        const { latitude, longitude } = position.coords;
-        // set user's location state
-        setUserLocation({ latitude, longitude });
-      });
+          // get access to lat and long values from GeoLocationCoordinates obj
+          const { latitude, longitude } = position.coords;
+          // set user location state
+          setUserLocation({ latitude, longitude });
+          // resolve promise
+          resolve();
+        },
+        // error case
+        (error) => {
+          console.error('Failed to get user location');
+          reject(error);
+        }
+      );
     } else {
-      console.error('Gelocation not supported by this browser')
+      console.error('Geolocation not supported by this browser');
+      reject(error);
     }
+  });
+};
+
+  const fetchEventsByLoc = () => {
+    // check if we have the user's location
+    if (!userLocation) {
+      // if not, request user to grant access
+      getUserLoc()
+        .then(() => {
+          fetchEvents()
+        })
+        .catch((err) => {
+          console.error('Error getting user location and fetching events', err);
+        })
+    } else {
+      // if we already have the user's location
+      fetchEvents()
+        .catch((err) => {
+          console.error('Error fetching events by location', err);
+        })
+    };
   };
+
+
 
 
   // Function to fetch quote from the API
@@ -71,40 +127,13 @@ function Home() {
       });
   };
 
-  // Axios GET request to retrieve upcoming events from DB
-  /** NOTE: This will be refactored many times. */
-  // const fetchEvents = () => {
-  //   axios.get('/api/events/all', {
-  //     params: {
-  //       limit: 8,
-  //     }
-  //   })
-  //     .then((response) => {
-  //       const eventData = response.data;
-  //     })
-  //     .catch((err) => {
-  //       console.error('Error fetching events from DB', err);
-  //     })
-  // }
 
-  const fetchEvents = () => {
-    axios.get('/api/events/all')
-      .then((response) => {
-        // assign variable to response data - eventData is used to map over data in render
-        const eventData = response.data;
-        // update state
-        setEventData(eventData);
-      })
-      .catch((err) => {
-        console.error('Error fetching events from DB', err);
-      })
-  }
 
   // Fetch motivational quote when the component mounts
   useEffect(() => {
     // Call the fetchQuote function
     fetchQuote();
-    fetchEvents();
+    fetchEventsByLoc();
   }, []); // Empty dependency array ensures this runs once when the component mounts
 
   // Helper function to render quote content based on that state
@@ -195,14 +224,6 @@ function Home() {
             <Typography variant="body1" className="section-description">
               Connect with your community
             </Typography>
-            <button onClick={getUserLocation}>Get User Location</button>
-            {userLocation && (
-              <div>
-                <h2>User Location</h2>
-                <p>Latitude: {userLocation.latitude}</p>
-                <p> Longitude: {userLocation.longitude}</p>
-              </div>
-            )}
             <Box className="events-preview">
 
               {
